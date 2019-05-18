@@ -1,0 +1,49 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static "CSS/bootstrap.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "CSS/styles.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "CSS/BeautyForm.css" %}">
+    <script type="text/javascript" src="{% static "JS/UsefulScripts.js" %}"></script>
+    <title>Home</title>
+</head>
+
+
+<body onload="Paste_Home_Page_Content()">
+
+    <div class="main_page_header">
+        {% block TITLE %}
+        {% endblock %}
+    </div>
+
+    <!-- МЕНЮ -->
+    {% block MENU %}
+    {% endblock %}
+
+
+    <div class="container">
+            <div class="row">
+                    <div class="col-md-2"> <!-- Первая колонка --></div>
+
+                    <div class="col-md-8">
+                        {% block MAIN_COLUMN %}
+                        {% endblock %}
+                    </div>
+
+                    <div class="col-md-2"> <!-- Первая колонка --></div>
+            </div>
+    </div>
+
+
+{% block login %}
+{% endblock %}
+
+{% block CONTACTS %}
+{% endblock %}
+
+
+</body>
+</html>

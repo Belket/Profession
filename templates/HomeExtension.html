@@ -1,0 +1,76 @@
+{% extends "Home.html" %}
+{% load staticfiles %}
+
+
+ <!-- МЕНЮ -->
+{% block MENU %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav"> <!-- Контент меню -->
+            <li class="nav-item">
+                    <a class="nav-link" href="/home/"> Главная страница </a>
+            </li>
+            <li class="nav-item">
+                    <a class="nav-link" href="#about_project"> О проекте </a>
+            </li>
+            <li class="nav-item">
+                    <a class="nav-link" href="#aim"> Цель </a>
+            </li>
+
+            {% if username %} <!-- Пользователь авторизирован -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact/"> Обратная связь </a>
+                </li>
+                <div class="form-row auth_pare">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/account/"> Личный кабинет </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/auth/logout/">Выйти ({{ username }})<span class="sr-only">(current)</span></a>
+                    </li>
+                </div>
+
+            {% else %} <!-- Пользователь не авторищирован -->
+                <div class="form-row auth_pare">
+                    <li>
+                        <a class="nav-link" href="/auth/login/"> Войти </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="/auth/registration/"> Зарегистрироваться </a>
+                    </li>
+                </div>
+            {% endif %}
+
+        </ul>
+      </div>
+</nav>
+{% endblock %}
+
+
+{% block TITLE %}
+    <div id="Title" class="main_page_header"></div>
+{% endblock %}
+
+
+
+{% block MAIN_COLUMN %}
+    <div class="main_page_content">
+        <a name="about_project"></a>
+        <h3> О проекте </h3>
+        <div id="about_project"></div>
+
+        <a name="aim"></a>
+        <h3> Цель </h3>
+        <div id="aim"></div>
+    </div>
+{% endblock %}
+
+
+{% block CONTACTS %}
+    <div id="contact_data" class="fixedContactData"></div>
+{% endblock %}
+
+

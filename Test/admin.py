@@ -1,0 +1,33 @@
+from django.contrib import admin
+from . import models
+
+
+# Register your models here.
+
+
+class QuestionWithAnswerInline(admin.TabularInline):
+    model = models.QuestionWithAnswer
+    extra = 0
+
+
+class QuestionWithVariantsInline(admin.TabularInline):
+    model = models.QuestionWithVariants
+    extra = 0
+
+
+@admin.register(models.Test)
+class TestAdmin(admin.ModelAdmin):
+    inlines = [QuestionWithAnswerInline, QuestionWithVariantsInline]
+    fields = ["test_title", "test_lesson_number", "test_description", "test_timer", "test_doing_time",
+              "test_publication_date", "test_price"]
+    list_display = ['test_title']
+
+
+@admin.register(models.Hint)
+class HintsAdmin(admin.ModelAdmin):
+    list_display = ['defined_word']
+
+
+
+
+

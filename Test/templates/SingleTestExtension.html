@@ -1,0 +1,150 @@
+{% extends "SingleTest.html" %}
+{% load thumbnail %}
+
+{% block TIMER %}
+    {% if test.test_timer != 0 %}
+            <p>Осталось времени: Min: <span id="siteTimerMinutes"></span> Sec: <span id="siteTimerSeconds"></span> </p>
+    {% endif %}
+{% endblock %}
+
+
+
+<!-- Создаем макет подсказки -->
+{% block TOOLTIP %}
+     <div id="HintBlock" class="MyTooltip"></div>
+{% endblock %}
+
+
+<!-- Тест с вариантами ответов -->
+{% block QUESTIONS_WITH_VARIANTS %}
+        {% for question in questions_with_variants %}
+
+            <div class="form-row">
+                <label for="{{ question.id }}" class="col-md-4" onmousemove = "showHint('{{ question.hint }}'  )"  onmouseout = "hideHint()">
+                    {{ question.question_text }}
+                </label>
+
+                {% thumbnail question.image "1000x200" crop="center" as image %}
+                    <img src="{{ image.url }}" width="{{ im.width }}" height="{{ image.height }} " alt="image failed">
+                {% endthumbnail %}
+
+
+                {% if question.question_with_one_answer %}
+                    <!-- Radio choices -->
+                    <div class="form-group">
+                        {% for variant in question.question_variants %}
+                            <input type="radio" name="{{ question.id }}" id="{{ question.id }}" value="{{ variant }}" >
+                            <label for="{{ question.id }}"> {{ variant }} </label> <br>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <!-- Check choices -->
+                    <div class="form-group">
+                        {% for variant in question.question_variants %}
+                            <input type="checkbox" name="{{ question.id }}" id="{{ question.id }}" value="{{ variant }}">
+                            <label for="{{ question.id }}"> {{ variant }} </label> <br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <hr>
+
+        {% endfor %}
+{% endblock %}
+
+
+
+<!-- Тест с ответом -->
+{% block QUESTIONS_WITH_ANSWER %}
+
+    <!-- Тест 15 -->
+
+    {% if test.test_lesson_number == 15 %}
+
+        <div id="Timer" style="display: none">
+            <p>Осталось времени: Min: <span id="siteTimerMinutes"></span> Sec: <span id="siteTimerSeconds"></span> </p>
+        </div>
+
+        {% for question in questions_with_answer %}
+            {% if question == questions_with_answer|first %}
+                <div id="description">
+                    Вам необходимо прослушать аудио и запомнить слова из нее, после прослушивания их надо записать в появившееся окно<br>
+                    Всего будет 6 прослушиваний, 5 из которых идут последовательно, а 6ое через час<br>
+                    ВНИМАНИЕ!!! <br>
+                    Аудиозапись исчезает как при ее завершении, так и при попытке остановить ее!<br>
+                    <hr>
+                </div>
+
+                <div id="{{ question.id }}_block">
+                    {% if question.audio %}
+                        <audio id="{{ question.id }}_audio" onended="control_audio(this.id)" onpause="control_audio(this.id)" controls controlsList="nodownload">
+                            <source src="{{ MEDIA_URL }}{{ question.audio }}" type="audio/mpeg">
+                        </audio>
+                    {% endif %}
+
+                    <div id="{{ question.id }}_form" class="form-row" style="display: none">
+                        <label id="{{ question.id }}_label" for="{{ question.id }}" class="col-md-4" onmousemove = "showHint('{{ question.hint }}')"  onmouseout = "hideHint()">
+                            {{ question.question_text }}
+                        </label>
+                        <textarea rows="3" name="{{ question.id }}" id="{{ question.id }}" placeholder="Введите ответ" class="col-md-8 rounded" ></textarea>
+                        <button id="{{ question.id }}_button" type="button" onclick="button_clicked({{ question.id }})" >Закончить ввод</button>
+                    </div>
+                    <hr>
+                </div>
+            {% else %}
+                <div id="{{ question.id }}_block" style="display: none">
+                    {% if question.audio %}
+                        <audio id="{{ question.id }}_audio" onended="control_audio(this.id)" onpause="control_audio(this.id)" controls controlsList="nodownload">
+                            <source src="{{ MEDIA_URL }}{{ question.audio }}" type="audio/mpeg">
+                        </audio>
+                    {% endif %}
+
+                    <div id="{{ question.id }}_form" class="form-row" style="display: none">
+                        <label id="{{ question.id }}_label" for="{{ question.id }}" class="col-md-4" onmousemove = "showHint('{{ question.hint }}')"  onmouseout = "hideHint()">
+                            {{ question.question_text }}
+                        </label>
+                        <textarea rows="3" name="{{ question.id }}" id="{{ question.id }}" placeholder="Введите ответ" class="col-md-8 rounded"></textarea>
+                        <button id="{{ question.id }}_button" type="button" onclick="button_clicked({{ question.id }})" >Закончить ввод</button>
+                    </div>
+                    <hr>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+
+
+
+    {% if test.test_lesson_number != 15 %}
+        {% for question in questions_with_answer %}
+
+            <div class="form-row">
+                <label for="{{ question.id }}" class="col-md-4" onmousemove = "showHint('{{ question.hint }}')"  onmouseout = "hideHint()">
+                    {{ question.question_text }}
+                </label>
+                <textarea rows="3" name="{{ question.id }}" id="{{ question.id }}" placeholder="Введите ответ" class="col-md-8 rounded"></textarea>
+            </div>
+
+            {% thumbnail question.image "200x200" crop="center" as image %}
+                <img src="{{ image.url }}" width="{{ im.width }}" height="{{ image.height }} " alt="image failed">
+            {% endthumbnail %}
+
+            <hr>
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
