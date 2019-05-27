@@ -18,8 +18,8 @@ class QuestionWithVariantsInline(admin.TabularInline):
 @admin.register(models.Test)
 class TestAdmin(admin.ModelAdmin):
     inlines = [QuestionWithAnswerInline, QuestionWithVariantsInline]
-    fields = ["test_title", "test_lesson_number", "test_description", "test_timer", "test_doing_time",
-              "test_publication_date", "test_price"]
+    fields = ["test_title", "test_lesson_number", "test_description", "test_timer", "test_author",
+              "test_publication_date"]
     list_display = ['test_title']
 
 

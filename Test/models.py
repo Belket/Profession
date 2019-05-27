@@ -1,5 +1,3 @@
-from djmoney.models.fields import MoneyField  # Денежные поля
-from pycbrf import ExchangeRates, Banks # Курсы валют
 from django.db import models
 from django.contrib.auth.models import User
 from sorl.thumbnail import ImageField
@@ -20,13 +18,10 @@ class Test(models.Model):
     id = models.AutoField(primary_key=True)
     test_lesson_number = models.IntegerField(blank=False)
     test_title = models.CharField(max_length=100)
-    test_doing_time = models.TimeField(blank=True)
     test_timer = models.IntegerField(blank=True, default=0)
     test_publication_date = models.DateField()
     test_description = models.TextField(max_length=2000, blank=True)
-    test_likes = models.PositiveIntegerField(default=0)
-    test_dislikes = models.PositiveIntegerField(default=0)
-    test_price = MoneyField(decimal_places=2, default=0, default_currency='RUB', max_digits=11,)
+    test_author = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return self.test_title
