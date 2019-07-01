@@ -33,7 +33,7 @@
                     <!-- Radio choices -->
                     <div class="form-group">
                         {% for variant in question.question_variants %}
-                            <input type="radio" name="{{ question.id }}" id="{{ question.id }}" value="{{ variant }}" >
+                            <input type="radio" name="{{ question.id }}" id="{{ question.id }}" value="{{ variant }}" required>
                             <label for="{{ question.id }}"> {{ variant }} </label> <br>
                         {% endfor %}
                     </div>
@@ -41,7 +41,7 @@
                     <!-- Check choices -->
                     <div class="form-group">
                         {% for variant in question.question_variants %}
-                            <input type="checkbox" name="{{ question.id }}" id="{{ question.id }}" value="{{ variant }}">
+                            <input type="checkbox" name="{{ question.id }}" id="{{ question.id }}" value="{{ variant }}" required>
                             <label for="{{ question.id }}"> {{ variant }} </label> <br>
                         {% endfor %}
                     </div>

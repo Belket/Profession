@@ -88,7 +88,7 @@ def test_results(request, current_login="MissLog", current_test_id="1"):
 
     current_user = User.objects.get(username=current_login)
     current_test = Test.objects.get(id=current_test_id)
-    # current_user.profile.add_finished_test(current_test.id)
+    current_user.profile.add_finished_test(current_test.id)
     current_user.save()
 
     functions_for_analise = {1: analise.analise_results_test_1(current_user.id, current_test_id),

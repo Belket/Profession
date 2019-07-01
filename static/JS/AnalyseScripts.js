@@ -173,7 +173,7 @@ function results_test_4(args, test_number) {
         }
     }
 
-    send_result(types_dict.get(_type), test_number);
+    send_result(types_dict[_type], test_number);
     final_content += P_D_text + A_C_text + C_L_text + H_O_text + K_text;
     let result_field = document.getElementById("result_field");
     console.log(final_content);
@@ -210,7 +210,7 @@ function results_test_5(args, test_number){
         }
     }
 
-    send_result(_types_dict.get(_type), test_number);
+    send_result(_types_dict[_type], test_number);
 }
 
 
@@ -368,7 +368,7 @@ function results_test_14(args, test_number){
         }
     }
 
-    send_result(_types_dict.get(_type), test_number);
+    send_result(_types_dict[_type], test_number);
 }
 
 

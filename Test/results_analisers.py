@@ -19,7 +19,10 @@ def analise_results_test_2(user_id, current_test_id):
 
     for i, value in enumerate(answers):
         true_index = i + 1
-        value = value.lower()
+        if value != None:
+            value = value.lower()
+        else:
+            pass
         if value == 'да' and true_index in extra_intro_yes: extra_intro_points += 1
         if value == 'нет' and true_index in extra_intro_no: extra_intro_points += 1
         if value == 'да' and true_index in lying_yes: lying_points += 1
@@ -58,7 +61,10 @@ def analise_results_test_3(user_id, current_test_id):
 
     for i, value in enumerate(answers):
         true_index = i + 1
-        value = value.lower()
+        if value != None:
+            value = value.lower()
+        else:
+            pass
         if value == 'да' and true_index in physical_agression_yes: physical_aggression_points += 1
         if value == 'нет' and true_index in physical_agression_no: physical_aggression_points += 1
         if value == 'да' and true_index in indirect_aggression_yes: indirect_aggression_points += 1
@@ -105,7 +111,10 @@ def analise_results_test_4(user_id, current_test_id):
 
     for i, value in enumerate(answers):
         true_index = i + 1
-        value = value.lower()
+        if value != None:
+            value = value.lower()
+        else:
+            pass
         if value == 'да' and true_index in P_D: P_D_points += 1
         if value == 'да' and true_index in A_C: A_C_points += 1
         if value == 'да' and true_index in C_L: C_L_points += 1
@@ -144,12 +153,13 @@ def analise_results_test_5(user_id, current_test_id):
                list(UsersAnswers.objects.filter(user_id=user_id, test=current_test_id))]
 
     for answer in answers:
-        if answer.lower() in profession_A: points_A += 1
-        if answer.lower() in profession_P: points_P += 1
-        if answer.lower() in profession_O: points_O += 1
-        if answer.lower() in profession_I: points_I += 1
-        if answer.lower() in profession_C: points_C += 1
-        if answer.lower() in profession_R: points_R += 1
+        if answer != None:
+            if answer.lower() in profession_A: points_A += 1
+            if answer.lower() in profession_P: points_P += 1
+            if answer.lower() in profession_O: points_O += 1
+            if answer.lower() in profession_I: points_I += 1
+            if answer.lower() in profession_C: points_C += 1
+            if answer.lower() in profession_R: points_R += 1
 
     return {"A":points_A, "P":points_P, "O":points_O, "I":points_I, "C":points_C, "R":points_R}
 
@@ -166,7 +176,7 @@ def analise_results_test_6(user_id, current_test_id):
                list(UsersAnswers.objects.filter(user_id=user_id, test=current_test_id))]
 
     for i, value in enumerate(answers):
-        if value.lower() == right_answers[i].lower(): points += 1
+        if value != None and value.lower() == right_answers[i].lower(): points += 1
     return {"points": points}
 
 
@@ -193,7 +203,7 @@ def analise_results_test_8(user_id, current_test_id):
                list(UsersAnswers.objects.filter(user_id=user_id, test=current_test_id))]
 
     for i, value in enumerate(answers):
-        if value.lower() == right_answers[i].lower(): points += 1
+        if value != None and value.lower() == right_answers[i].lower(): points += 1
 
     results = {"percentage": points / len(right_answers) * 100}
     return results
@@ -213,7 +223,7 @@ def analise_results_test_9(user_id, current_test_id):
                list(UsersAnswers.objects.filter(user_id=user_id, test=current_test_id))]
 
     for i, value in enumerate(answers):
-        if value.lower() == right_answers[i].lower(): points += 1
+        if value != None and value.lower() == right_answers[i].lower(): points += 1
 
     results = {"percentage": points / len(right_answers) * 100}
     return results
@@ -226,7 +236,7 @@ def analise_results_test_10(user_id, current_test_id):
     answers = [answer.user_answer for answer in
                list(UsersAnswers.objects.filter(user_id=user_id, test=current_test_id))]
     for i, value in enumerate(answers):
-        if value.lower() == right_answers[i].lower(): points += 1
+        if value != None and value.lower() == right_answers[i].lower(): points += 1
 
     results = {"percentage": points / len(right_answers) * 100}
     return results
@@ -242,7 +252,7 @@ def analise_results_test_11(user_id, current_test_id):
                list(UsersAnswers.objects.filter(user_id=user_id, test=current_test_id))]
 
     for i, value in enumerate(answers):
-        if value.lower() == right_answers[i].lower(): points += 1
+        if value != None and value.lower() == right_answers[i].lower(): points += 1
 
     results = {"percentage": points / len(right_answers) * 100}
     return results
@@ -259,7 +269,7 @@ def analise_results_test_12(user_id, current_test_id):
                list(UsersAnswers.objects.filter(user_id=user_id, test=current_test_id))]
 
     for i, value in enumerate(answers):
-        if value.lower() == right_answers[i].lower(): points += 1
+        if value != None and value.lower() == right_answers[i].lower(): points += 1
 
     results = {"percentage": points / len(right_answers) * 100}
     return results
@@ -275,7 +285,7 @@ def analise_results_test_13(user_id, current_test_id):
                list(UsersAnswers.objects.filter(user_id=user_id, test=current_test_id))]
 
     for i, value in enumerate(answers):
-        if value.lower() == right_answers[i].lower(): points += 1
+        if value != None and value.lower() == right_answers[i].lower(): points += 1
 
     results = {"percentage": points / len(right_answers) * 100}
     return results
@@ -334,7 +344,7 @@ def analise_results_test_15(user_id, current_test_id):
         mark = 0
         words = value.split(", ")
         for word in words:
-            if word.lower() in right_answers:
+            if word != None and word.lower() in right_answers:
                 mark += 1
         marks.append(mark)
 

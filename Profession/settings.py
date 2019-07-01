@@ -142,8 +142,8 @@ STATICFILES_DIRS = [
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'glebchek97@gmail.com'
-EMAIL_HOST_PASSWORD = ' '
+EMAIL_HOST_USER = 'vgforall1@gmail.com'
+EMAIL_HOST_PASSWORD = 'Hf6lADsqw5m4'
 EMAIL_PORT = 587
 SERVER_EMAIL = 'django@my-domain.com'
 
