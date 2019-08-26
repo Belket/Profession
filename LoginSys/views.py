@@ -85,3 +85,7 @@ def registration(request):
 
 def personal_account(request):
     return render_to_response("../PersonalAccount/templates/PersonalAccount.html")
+
+
+def personal_tests(request):
+    return render_to_response("../PersonalAccount/templates/PersonalTests.html")

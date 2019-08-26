@@ -73,7 +73,7 @@ function Timer(critical_time) {
 function was_finished(is_finished) {
     console.log(is_finished);
     if (is_finished === 1) {
-       window.location.replace("http://vgforall1.pythonanywhere.com/account/");
+       window.location.replace("http://127.0.0.1/account/");
     }
     else {
         return 0;

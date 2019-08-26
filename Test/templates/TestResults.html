@@ -24,9 +24,28 @@
             <li class="nav-item">
                 <a class="nav-link" href="/contact/"> Обратная связь </a>
             </li>
-            <li class="nav-item auth_pare">
-                <a class="nav-link" href="/account/"> Личный кабинет </a>
-            </li>
+            {% if user.username %} <!-- Пользователь авторизирован -->
+                <div class="form-row auth_pare">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/account/"> Личный кабинет </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/account/personal_tests"> Мои тесты </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/auth/logout/"> Выйти ({{ user.username }})<span class="sr-only">(current)</span></a>
+                    </li>
+                </div>
+            {% else %}
+                <div class="form-row auth_pare">
+                    <li>
+                        <a class="nav-link" href="/auth/login/"> Войти </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="/auth/registration/"> Зарегистрироваться </a>
+                    </li>
+                </div>
+            {% endif %}
         </ul>
       </div>
     </nav>

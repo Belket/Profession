@@ -28,12 +28,15 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/account/"> Личный кабинет </a>
                     </li>
+                    <li>
+                        <a class="nav-link" href="/account/personal_tests/">Мои тесты</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/auth/logout/">Выйти ({{ username }})<span class="sr-only">(current)</span></a>
                     </li>
                 </div>
 
-            {% else %} <!-- Пользователь не авторищирован -->
+            {% else %} <!-- Пользователь не авторизован -->
                 <div class="form-row auth_pare">
                     <li>
                         <a class="nav-link" href="/auth/login/"> Войти </a>

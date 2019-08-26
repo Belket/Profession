@@ -45,24 +45,31 @@
             <div class="col-md-2"></div>
 
             <div class="col-md-8">
-                <div class="main_page_header">
-                    <h3>  Измените ваши данные </h3>
+                <div class="main_page_header" style="margin-top: 15px">
+                    <h3> Изменение данных </h3>
+                    <h5> Внесите новые данные в поля, которые хотите изменить. </h5>
                 </div>
 
                 <div type="fields">
                   <form action="/account/changedata/" method="post">
                     {% csrf_token %}
                     <label for="name">Имя</label>
-                    <input type="text" id="name" name="name" placeholder="Ваше имя..">
+                    <input type="text" id="name" name="name" placeholder="Ваше имя...">
 
                     <label for="surname">Фамилия</label>
-                    <input type="text" id="surname" name="surname" placeholder="Ваша фамилия..">
+                    <input type="text" id="surname" name="surname" placeholder="Ваша фамилия...">
+
+                    <label for="country">Страна</label>
+                    <input type="text" id="country" name="country" placeholder="Страна проживания...">
+
+                    <label for="city">Город</label>
+                    <input type="text" id="city" name="city" placeholder="Город проживания...">
 
                     <label for="id_password1">Пароль</label>
-                    <input type="text" id="id_password1" name="password1" placeholder="Введите пароль..">
+                    <input type="text" id="id_password1" name="password1" placeholder="Введите пароль...">
 
                     <label for="id_password2">Пароль</label>
-                    <input type="text" id="id_password2" name="password2" placeholder="Введите пароль..">
+                    <input type="text" id="id_password2" name="password2" placeholder="Подтвердите пароль...">
 
                     <input type="submit" value="Сохранить изменения">
                   </form>

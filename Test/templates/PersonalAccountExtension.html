@@ -5,53 +5,65 @@
 {%  block PROFILE %}
     <div type="fields">
         <h3> Информация </h3>
-        <label for="login">Логин</label>
-        <input type="text" id="login" name="login" value="{{ user.username }}" readonly>
-
-        <label for="name">Имя</label>
-        <input type="text" id="name" name="name" value="{{ user.first_name }}" readonly>
-
-        <label for="surname">Фамилия</label>
-        <input type="text" id="login" name="surname" value="{{ user.last_name }}" readonly>
-
-        <label for="email">Почта</label>
-        <input type="text" id="email" name="email" value="{{ user.email }}" readonly>
-
-        <a href="/account/changedata/"><button class="col-sm-12" type="button"> Изменить данные </button></a>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="login">Логин</label>
+                </div>
+                <div class="col-md-10">
+                    <input type="text" id="login" name="login" value="{{ user.username }}" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="name">Имя</label>
+                </div>
+                <div class="col-md-10">
+                    <input type="text" id="name" name="name" value="{{ user.first_name }}" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="surname">Фамилия</label>
+                </div>
+                <div class="col-md-10">
+                    <input type="text" id="login" name="surname" value="{{ user.last_name }}" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="email">Почта</label>
+                </div>
+                <div class="col-md-10">
+                    <input type="text" id="email" name="email" value="{{ user.email }}" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="birth">Дата рождения</label>
+                </div>
+                <div class="col-md-10">
+                    <input type="text" id="birth" name="birth" value="{{ profile.date_of_birth }}" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="country">Страна</label>
+                </div>
+                <div class="col-md-10">
+                    <input type="text" id="country" name="country" value="{{ profile.country_of_residence}}" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="city">Город</label>
+                </div>
+                <div class="col-md-10">
+                    <input type="text" id="city" name="city" value="{{ profile.city_of_residence}}" readonly>
+                </div>
+            </div>
+        <a href="/account/changedata/"><button class="col-sm-4" type="button"> Изменить данные </button></a>
     </div>
 {% endblock %}
-
-
-<!-- Все тесты с описанием и числом лайков-->
-{% block TESTS %}
-    <div type="fields">
-        <h2>Тесты</h2>
-        {% for test in tests %}
-            {% if test.id in finished_tests %}
-                <h6><a href = "/results/{{ user.username }}/{{ test.id }}">Результаты теста {{ test.test_lesson_number}} </a></h6>
-            {% else %}
-                <h6><a href = "/account/{{ user.username }}/{{ test.id }}"> Тест {{ test.test_lesson_number }}</a></h6>
-            {% endif %}
-           <hr>
-        {% endfor %}
-        {% if finished_tests.length == 16 %}
-            <h6><a href = "/final_results/{{ user.username }}/{{ test.id }}"> Итоговый результат </a></h6>
-        {% endif %}
-    </div>
-{% endblock %}
-
-
-<!-- Контактные данные -->
-{% block CONTACTS %}
-    <div class="fixedContactData">
-        <hr>
-        Телефон: <br>
-        Еще что-то: <br>
-    </div>
-{% endblock %}
-
-
-
 
 
 {% block MENU %}
@@ -64,10 +76,28 @@
             <li class="nav-item">
                     <a class="nav-link" href="/home/"> Главная страница </a>
             </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="/contact/"> Обратная связь </a>
             </li>
+            {% if user.username %} <!-- Пользователь авторизирован -->
+                <div class="form-row auth_pare">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/account/personal_tests"> Мои тесты </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/auth/logout/">Выйти ({{ user.username }})<span class="sr-only">(current)</span></a>
+                    </li>
+                </div>
+            {% else %} <!-- Пользователь не авторизован -->
+                <div class="form-row auth_pare">
+                    <li>
+                        <a class="nav-link" href="/auth/login/"> Войти </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="/auth/registration/"> Зарегистрироваться </a>
+                    </li>
+                </div>
+            {% endif %}
         </ul>
       </div>
     </nav>

@@ -30,7 +30,8 @@ SECRET_KEY = '+e6kt%wcadocu^8s869fiae%gqi19z=!fns)r=jc(*q_do&m0w'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["vgforall1.pythonanywhere.com"]
+# ALLOWED_HOSTS = ["vgforall1.pythonanywhere.com"]
+ALLOWED_HOSTS = ["127.0.0.1"]
 
 
 # Application definition

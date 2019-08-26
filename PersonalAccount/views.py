@@ -1,10 +1,22 @@
 from django.shortcuts import render_to_response, redirect
 from django.contrib.auth.models import User
 from django.contrib import auth
-from Test.models import Test
+from Test.models import Test, UsersAnswers, Results
 from Profile.models import Profile
 from django.template.context_processors import csrf
 # Create your views here.
+
+
+def reset_answers(request):
+    user = auth.get_user(request)
+    answers = UsersAnswers.objects.filter(user=user)
+    for answer in answers:
+        answer.delete()
+    results = Results.objects.filter(user_id=user)
+    for result in results:
+        result.delete()
+    user.profile.reset_test()
+    return redirect("personal_tests/")
 
 
 def activate_user(request, current_login="Login", activation_salt="yeap"):
@@ -22,9 +34,16 @@ def activate_user(request, current_login="Login", activation_salt="yeap"):
 def personal_account(request):
     user = User.objects.get(id=auth.get_user(request).id)
     profile = Profile.objects.get(user=user.id)
+    return render_to_response('PersonalAccountExtension.html', {'user': user, 'profile': profile})
+
+
+def personal_tests(request):
+    user = User.objects.get(id=auth.get_user(request).id)
+    profile = Profile.objects.get(user=user.id)
     finished_tests = profile.get_integer_finished_tests()
-    return render_to_response('PersonalAccountExtension.html', {'tests': Test.objects.all(),
-                              'user': user, 'finished_tests': finished_tests})
+    return render_to_response('PersonalTests.html', {'user': user,
+                                                     'tests': Test.objects.all().order_by('test_lesson_number'),
+                                                     'finished_tests': finished_tests})
 
 
 def change_profile_data(request):

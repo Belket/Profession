@@ -1,4 +1,3 @@
-
 from django.contrib import auth
 from django.shortcuts import render_to_response, render, redirect, HttpResponse
 from Test.models import Test, QuestionWithVariants, QuestionWithAnswer, UsersAnswers, Hint, Results
@@ -72,10 +71,12 @@ def single_test(request, current_login="MissLog",  current_id="1"):
             recognized_words += help_func.is_hint_need(answers)
             recognized_words += help_func.is_hint_need(current_question.get("question_text"))
             recognized_words = list(set(recognized_words))
+            print("RECOGNIZED WORDS IN VIEWS:", recognized_words)
             for word in recognized_words:
                 current_hint = Hint.objects.get(defined_word=word)
                 hint_text += current_hint.defined_word + ": " + current_hint.hint + "***"
             current_question.update({'hint': hint_text})
+            print("************\n", current_question, "\n************")
 
         return render(request, 'SingleTestExtension.html', {'test': current_test,
                                                             'questions_with_answer': questions_with_answer,
@@ -91,24 +92,24 @@ def test_results(request, current_login="MissLog", current_test_id="1"):
     current_user.profile.add_finished_test(current_test.id)
     current_user.save()
 
-    functions_for_analise = {1: analise.analise_results_test_1(current_user.id, current_test_id),
-                             2: analise.analise_results_test_2(current_user.id, current_test_id),
-                             3: analise.analise_results_test_3(current_user.id, current_test_id),
-                             4: analise.analise_results_test_4(current_user.id, current_test_id),
-                             5: analise.analise_results_test_5(current_user.id, current_test_id),
-                             6: analise.analise_results_test_6(current_user.id, current_test_id),
-                             7: analise.analise_results_test_7(current_user.id, current_test_id),
-                             8: analise.analise_results_test_8(current_user.id, current_test_id),
-                             9: analise.analise_results_test_9(current_user.id, current_test_id),
-                             10: analise.analise_results_test_10(current_user.id, current_test_id),
-                             11: analise.analise_results_test_11(current_user.id, current_test_id),
-                             12: analise.analise_results_test_12(current_user.id, current_test_id),
-                             13: analise.analise_results_test_13(current_user.id, current_test_id),
-                             14: analise.analise_results_test_14(current_user.id, current_test_id),
-                             15: analise.analise_results_test_15(current_user.id, current_test_id),
-                             16: analise.analise_results_test_16(current_user.id, current_test_id), }
+    functions_for_analise = {1: analise.analise_results_test_1,
+                             2: analise.analise_results_test_2,
+                             3: analise.analise_results_test_3,
+                             4: analise.analise_results_test_4,
+                             5: analise.analise_results_test_5,
+                             6: analise.analise_results_test_6,
+                             7: analise.analise_results_test_7,
+                             8: analise.analise_results_test_8,
+                             9: analise.analise_results_test_9,
+                             10: analise.analise_results_test_10,
+                             11: analise.analise_results_test_11,
+                             12: analise.analise_results_test_12,
+                             13: analise.analise_results_test_13,
+                             14: analise.analise_results_test_14,
+                             15: analise.analise_results_test_15,
+                             16: analise.analise_results_test_16, }
 
-    result = functions_for_analise.get(current_test.test_lesson_number)
+    result = functions_for_analise.get(current_test.test_lesson_number)(current_user.id, current_test_id)
 
     if request.POST:
         results = request.POST.get('result')

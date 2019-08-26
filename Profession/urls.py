@@ -26,10 +26,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),  # Админка
     path('home/', pages_views.home_page),  # Стартовая страница
     path('account/<current_login>/<current_id>', test_views.single_test),  # Конкретный тест
+    path('account/reset_answers', account_views.reset_answers), # Очистить ответы пользователя
     path('auth/login/', auth_views.login),  # Страница авторизации
     path('auth/logout/', auth_views.logout),  # Выход из авторизации
     path('auth/registration/', auth_views.registration),  # Регистрация
     path('account/', account_views.personal_account),  # Вход в личный кабинет
+    path('account/personal_tests/', account_views.personal_tests),
     path('account/changedata/', account_views.change_profile_data),  # Изменение данных профиля
     path('contact/',pages_views.contact_us),  # Контактная форма
     path('results/<current_login>/<current_test_id>', test_views.test_results),
