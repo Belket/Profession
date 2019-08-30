@@ -53,24 +53,29 @@
 
 
     <!--  ЗАГОЛОВОК -->
-    <h1 class="main_page_header"> {{ test.test_title }} </h1>
-    <div class="container" style="margin-bottom: 50px; margin-top: 50px">
+    <div class="container" style="margin-top: 30px">
+        <h1 class="main_page_header"> {{ test.test_title }} </h1>
+    </div>
+    <div class="container" style="margin-bottom: 30px; margin-top: 30px">
         <div class="row">
-            <div class="col-md-2"></div>
+            <div class="col-md-2">
+                <h5> Задание: </h5>
+            </div>
             <div class="col-md-8">
                 {{ test.test_description }}
             </div>
             <div class="col-md-2"></div>
         </div>
     </div>
+    <hr>
 
-    <div class="container">
+
+    <div class="container" style="margin-top: 30px">
             <div class="row">
                     <div class="col-md-2"> <!-- Первая колонка -->
-
+                        <h5> Вопросы: </h5>
                     </div>
                     <div class="col-md-8"> <!-- Вторая колонка -->
-
                         <form id="data_form" role="form" method="post" action="/account/{{ user.username }}/{{ test.id }}">
                             {% csrf_token %}
 
@@ -81,7 +86,10 @@
                             {% block QUESTIONS_WITH_VARIANTS %}
                             {% endblock %}
 
-                            <button type="submit" id="FinishButton"> Завершить тест </button>
+                            <button class="beauty_button" type="submit" id="FinishButton"
+                                    target="_blank" rel="nofollow noopener">
+                                Завершить тест
+                            </button>
                         </form>
 
                     </div>

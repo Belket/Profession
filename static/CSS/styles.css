@@ -90,3 +90,20 @@ body {
     position: absolute;
 }
 
+.beauty_button {
+    color: black;
+    text-decoration: none;
+    font-weight: normal;
+    background: #ffffff;
+    padding: 15px;
+    border: 2px solid grey;
+    display: inline-block;
+    transition: all 0.4s ease 0s;
+}
+
+.beauty_button:hover {
+    color: #ffffff;
+    background: #4CAF50;
+    border-color: #4CAF50;
+    transition: all 0.4s ease 0s;
+}

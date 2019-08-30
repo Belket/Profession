@@ -80,15 +80,21 @@ def analise_results_test_3(user_id, current_test_id):
         if value == 'нет' and true_index in verbal_aggression_no: verbal_aggression_points += 1
         if value == 'да' and true_index in remorse_conscience_yes: remorse_conscience_points += 1
 
-    points_sum = len(answers)
-    percents = {"physical_aggression": str(format('%.2f' % (physical_aggression_points / points_sum * 100))) + "%",
-                "indirect_aggression": str(format('%.2f' % (indirect_aggression_points / points_sum * 100))) + "%",
-                "irritation": str(format('%.2f' % (irritation_points / points_sum * 100))) + "%",
-                "negativism": str(format('%.2f' % (negativism_points / points_sum * 100))) + "%",
-                "offence": str(format('%.2f' % (offense_points / points_sum * 100))) + "%",
-                "suspicion": str(format('%.2f' % (suspicion_points / points_sum * 100))) + "%",
-                "verbal_aggression": str(format('%.2f' % (verbal_aggression_points / points_sum * 100))) + "%",
-                "remorse_conscience": str(format('%.2f' % (remorse_conscience_points / points_sum * 100))) + "%"
+    percents = {"physical_aggression": str(format('%.2f' % (physical_aggression_points / \
+                                       sum(map(len, [physical_agression_no, physical_agression_yes])) * 100))) + "%",
+                "indirect_aggression": str(format('%.2f' % (indirect_aggression_points / \
+                                       sum(map(len, [indirect_aggression_yes, indirect_aggression_no])) * 100))) + "%",
+                "irritation": str(format('%.2f' % (irritation_points / \
+                                       sum(map(len, [irritation_yes, irritation_no])) * 100))) + "%",
+                "negativism": str(format('%.2f' % (negativism_points / len(negativism_yes) * 100))) + "%",
+                "offence": str(format('%.2f' % (offense_points / \
+                                       sum(map(len, [offense_yes, offense_no])) * 100))) + "%",
+                "suspicion": str(format('%.2f' % (suspicion_points / \
+                                       sum(map(len, [suspicion_yes, suspicion_no])) * 100))) + "%",
+                "verbal_aggression": str(format('%.2f' % (verbal_aggression_points / \
+                                       sum(map(len, [verbal_aggression_yes, verbal_aggression_no]))* 100))) + "%",
+                "remorse_conscience": str(format('%.2f' % (remorse_conscience_points / \
+                                                           len(remorse_conscience_yes) * 100))) + "%"
                 }
 
     return percents
