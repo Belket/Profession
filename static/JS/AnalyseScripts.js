@@ -152,17 +152,19 @@ function results_test_3(args, test_number) {
 
 
 function results_test_4(args, test_number) {
-    let final_content = "";
+    let final_content = "<br>Количество баллов указывает на уровень развития определенного типа мышления:";
     let types_dict = {"P_D": "Предметно действенное мышление",
                        "A_C": "Абстрактно символическое мышление",
                        "C_L": "Словесно логическое мышление",
                        "H_O": "Наглядно образное мышление",
                        "K": "Креативность"};
+    let levels = "<div>0-2: низкий<br>3–5: средний<br>6–8: высокий<br><br></div>";
     let P_D_text = "<div>Предметно–действенное мышление - " + args.P_D + " баллов из 8</div>";
     let A_C_text = "<div>Абстрактно–символическое мышление - " + args.A_C + " баллов из 8</div>";
     let C_L_text = "<div>Словесно–логическое мышление - " + args.C_L + " баллов из 8</div>";
     let H_O_text = "<div>Наглядно–образное мышление-  " + args.H_O + " баллов из 8</div>";
     let K_text = "<div>Креативность - " + args.K + " баллов из 8</div>";
+    let descriptions = "<br><div>" + readTextFile("ResultsTexts/Lesson_4/descriptions.txt")+ "</div>";
 
     let _max = 0;
     let _type = "";
@@ -174,7 +176,7 @@ function results_test_4(args, test_number) {
     }
 
     send_result(types_dict[_type], test_number);
-    final_content += P_D_text + A_C_text + C_L_text + H_O_text + K_text;
+    final_content += levels + P_D_text + A_C_text + C_L_text + H_O_text + K_text + descriptions;
     let result_field = document.getElementById("result_field");
     console.log(final_content);
     result_field.innerHTML = final_content;
@@ -297,7 +299,7 @@ function results_test_10(args, test_number){
 function results_test_11(args, test_number){
     let final_content = "";
     let test_result;
-    final_content += "Вы ответили верно на " + args.percentage + " вопросов<br>";
+    final_content += "Вы ответили верно на " + args.percentage + "% вопросов<br>";
     final_content += "<div></div>";
     let result_field = document.getElementById("result_field");
     result_field.innerHTML = final_content;
@@ -313,7 +315,7 @@ function results_test_11(args, test_number){
 function results_test_12(args, test_number){
     let final_content = "";
     let test_result;
-    final_content += "Вы ответили верно на " + args.percentage + " вопросов<br>";
+    final_content += "Вы ответили верно на " + args.percentage + "% вопросов<br>";
     final_content += "<div></div>";
     let result_field = document.getElementById("result_field");
     result_field.innerHTML = final_content;

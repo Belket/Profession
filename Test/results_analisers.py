@@ -260,7 +260,7 @@ def analise_results_test_11(user_id, current_test_id):
     for i, value in enumerate(answers):
         if value != None and value.lower() == right_answers[i].lower(): points += 1
 
-    results = {"percentage": points / len(right_answers) * 100}
+    results = {"percentage": int(points / len(right_answers) * 100)}
     return results
 
 
@@ -275,9 +275,9 @@ def analise_results_test_12(user_id, current_test_id):
                list(UsersAnswers.objects.filter(user_id=user_id, test=current_test_id))]
 
     for i, value in enumerate(answers):
-        if value != None and value.lower() == right_answers[i].lower(): points += 1
+        if value != None and value.split(')')[0].lower() == right_answers[i].lower(): points += 1
 
-    results = {"percentage": points / len(right_answers) * 100}
+    results = {"percentage": int(points / len(right_answers) * 100)}
     return results
 
 
